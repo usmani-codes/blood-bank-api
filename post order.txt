@@ -1,0 +1,21 @@
+{
+  "orderItems": [
+    {
+      "product": "6742101dfd1a53edd75d1289",
+      "quantity": 5
+    },
+    {
+      "product": "6742101dfd1a53edd75d128a",
+      "quantity": 2
+    }
+  ],
+  "shipingAddress": "karachi",
+  "shipingAddress2": "",
+  "city": "karachi",
+  "zip": "4200",
+  "country": "pakistan",
+  "phone": "01235445345",
+  "status": "pending",
+  "totalprice": 1200,
+  "user": "6740e824539c2e032758641c"
+}
