@@ -6,11 +6,12 @@ const testSchema = mongoose.Schema({
         ref: 'Doner',
         required: true
     },
-    TestDate: {
+    testDate: {
         type: Date
     },
     result: {
-        type: String
+        type: String,
+        default: "pending"
     }
 
 }, {

@@ -9,7 +9,7 @@ import { User } from '../models/user.js'
 const getUsers = async (req, res, next) => {
     const users = await User.find({})
     if (!users.length) {
-        return res.status(404).json({ success: false, Doner: 'no users found' })
+        return res.status(404).json({ success: false, msg: 'no users found' })
     }
     res.status(200).json({ success: true, data: users })
 }
@@ -27,7 +27,7 @@ const getUser = async (req, res, next) => {
     const user = await User.findOne({ _id: id })
 
     if (!user) {
-        return res.status(404).json({ success: false, Doner: 'no user found with this id' })
+        return res.status(404).json({ success: false, msg: 'no user found with this id' })
     }
 
     res.json({ success: true, data: user })

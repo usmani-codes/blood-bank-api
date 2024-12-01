@@ -7,7 +7,7 @@ const getHospitals = async (req, res, next) => {
     const hospitals = await Hospital.find({})
 
     if (!hospitals.length) {
-        return res.status(404).json({ success: false, Doner: 'no hospitals found' })
+        return res.status(404).json({ success: false, msg: 'no hospitals found' })
     }
 
     return res.json({ success: true, data: hospitals })
@@ -25,7 +25,7 @@ const getHospital = async (req, res, next) => {
     const hospital = await Hospital.findOne({ _id: id })
 
     if (!hospital) {
-        return res.status(404).json({ success: false, Doner: 'no hospital found with this id' })
+        return res.status(404).json({ success: false, msg: 'no hospital found with this id' })
     }
 
     return res.json({ success: true, data: hospital })
@@ -44,14 +44,14 @@ const createHospital = async (req, res, next) => {
 
     //hospital name must be unique in the city
     if (hospital && name === hospital.name && city === hospital.city) {
-        return res.status(401).json({ success: false, Doner: 'hospital with same name in a city cannot be created !' })
+        return res.status(401).json({ success: false, msg: 'hospital with same name in a city cannot be created !' })
     }
 
     const newHospital = new Hospital({ name, city, country })
     await newHospital.save()
 
     if (!newHospital) {
-        res.status(404).json({ success: false, Doner: 'the Hospital cannot be created!' })
+        res.status(404).json({ success: false, msg: 'the Hospital cannot be created!' })
     }
 
     res.status(200).json({ success: true, data: newHospital })
@@ -87,13 +87,12 @@ const deleteHospital = async (req, res, next) => {
     }
 
     const hospital = await Hospital.findOneAndDelete({ _id: id })
-    console.log("hospital: ", hospital)
 
     if (!hospital) {
-        return res.status(404).json({ success: true, Doner: `hospital type could not deleted ..` })
+        return res.status(404).json({ success: true, msg: `hospital type could not deleted ..` })
     }
 
-    res.status(200).json({ success: true, Doner: `hospital deleted`, hospital })
+    res.status(200).json({ success: true, msg: `hospital deleted`, hospital })
 }
 
 // @desc get hospitals total count

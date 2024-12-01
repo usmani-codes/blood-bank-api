@@ -7,7 +7,8 @@ const reactionSchema = mongoose.Schema({
         required: true
     },
     reactionDescription: {
-        type: String
+        type: String,
+        required: true
     }
 
 }, {

@@ -3,7 +3,7 @@ import bcypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 import { User } from '../models/user.js'
-import Doner from '../models/doner.js'
+import Doner from '../models/Doner.js'
 import Recipient from '../models/recipient.js'
 import Blood from '../models/blood.js'
 import BloodBank from '../models/bloodBank.js'
@@ -12,10 +12,6 @@ import BloodBank from '../models/bloodBank.js'
 const jwtSecret = process.env.JWT_SECRET
 
 const login = async (req, res, next) => {
-
-    console.log("in login..")
-
-
     const { email, password } = req.body
     if (!email || !password) {
         return res.status(401).json({ success: false, msg: 'please provide all required fields' })
@@ -38,6 +34,7 @@ const login = async (req, res, next) => {
 
     const token = jwt.sign({ email, isAdmin: user.isAdmin }, jwtSecret, { expiresIn: '1d' })
 
+    console.log("logged in as:", user.name)
     res.status(201).json({ success: true, userId: user.id, msg: "user logedIn successfully ", token })
 
 }
@@ -88,7 +85,7 @@ const register = async (req, res, next) => {
     const dbBloodBank = BloodBank.findOne({ _id: blood })
 
     if (!isAdmin && !dbBlood && !dbBloodBank) {
-        return res.status(400).json({ success: false, Doner: 'either blood Type or blood bank id is not valid ..' })
+        return res.status(400).json({ success: false, msg: 'either blood Type or blood bank id is not valid ..' })
     }
 
     //below order matters
@@ -104,7 +101,7 @@ const register = async (req, res, next) => {
     }
 
     if (!newUser) {
-        res.status(400).json({ success: false, Doner: 'the user cannot be created!' })
+        res.status(400).json({ success: false, msg: 'the user cannot be created!' })
     }
 
     const token = jwt.sign({ email, isAdmin }, jwtSecret, { expiresIn: '1d' })

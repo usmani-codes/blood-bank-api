@@ -17,7 +17,8 @@ const bloodStock = mongoose.Schema({
     },
     expiryDate: {
         type: Date,
-        default: new Date.now * 4800000
+        required: true
+        // default: new Date.now * 4800000
     }
 
 }, {

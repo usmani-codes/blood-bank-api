@@ -3,13 +3,20 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 
 //routes
-import auth from './routes/auth.js'
+import { auth } from './routes/index.js'
+// import auth from './routes/auth.js'
 import user from './routes/user.js'
 import hospital from './routes/hospital.js'
 import bloodBank from './routes/bloodBank.js'
 import blood from './routes/blood.js'
 import doner from './routes/doner.js'
 import recipient from './routes/recipient.js'
+import appointment from './routes/appointment.js'
+import test from './routes/test.js'
+import bloodStock from './routes/bloodStock.js'
+import organization from './routes/organization.js'
+import transfusion from './routes/transfusion.js'
+import reaction from './routes/reaction.js'
 
 // middlewares
 import { AdminsOnly, AUTH, logger, notFound, errorHandler } from './middlewares/index.js'
@@ -32,6 +39,13 @@ app.use(`${api}/blood-banks`, AUTH, bloodBank)
 app.use(`${api}/bloods`, AUTH, blood)
 app.use(`${api}/doners`, AUTH, doner)
 app.use(`${api}/recipients`, AUTH, recipient)
+app.use(`${api}/appointments`, AUTH, appointment)
+app.use(`${api}/tests`, AUTH, test)
+app.use(`${api}/blood-stocks`, AUTH, bloodStock)
+app.use(`${api}/organizations`, AUTH, organization)
+app.use(`${api}/transfusions`, AUTH, transfusion)
+app.use(`${api}/reactions`, AUTH, reaction)
+
 
 // middilewares
 app.use(notFound)

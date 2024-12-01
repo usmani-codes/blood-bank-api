@@ -6,7 +6,7 @@ const getBloodTypes = async (req, res, next) => {
     const bloods = await Blood.find({})
 
     if (!bloods.length) {
-        return res.status(404).json({ success: false, Doner: 'no blood Type found' })
+        return res.status(404).json({ success: false, msg: 'no blood Type found' })
     }
 
     return res.json({ success: true, data: bloods })
@@ -25,7 +25,7 @@ const getBloodType = async (req, res, next) => {
     const blood = await Blood.find({ _id: id })
 
     if (!blood) {
-        return res.status(404).json({ success: false, Doner: 'no blood type found with this id' })
+        return res.status(404).json({ success: false, msg: 'no blood type found with this id' })
     }
 
     return res.json({ success: true, data: blood })
@@ -43,14 +43,14 @@ const createBloodType = async (req, res, next) => {
     const blood = await Blood.findOne({ name })
 
     if (blood) {
-        return res.status(401).json({ success: false, Doner: 'blood type already existed !' })
+        return res.status(401).json({ success: false, msg: 'blood type already existed !' })
     }
 
     const newBlood = new Blood({ name, description })
     await newBlood.save()
 
     if (!newBlood) {
-        res.status(404).json({ success: false, Doner: 'the blood type cannot be created!' })
+        res.status(404).json({ success: false, msg: 'the blood type cannot be created!' })
     }
 
     res.status(200).json({ success: true, data: newBlood })

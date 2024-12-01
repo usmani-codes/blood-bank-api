@@ -1,7 +1,7 @@
 import express from "express";
 
 import {
- getBloodTypes, getBloodType, createBloodType, updateBloodType, deleteBloodType, getBloodTypesCount 
+    getBloodTypes, getBloodType, createBloodType, updateBloodType, deleteBloodType, getBloodTypesCount
 } from "../controllers/bloodTypesController.js";
 
 const router = express.Router();
@@ -13,7 +13,7 @@ router.get("/", getBloodTypes);
 router.get("/:id", getBloodType);
 
 //create a blood type
-router.post("/",createBloodType);
+router.post("/", createBloodType);
 
 //update a blood type
 router.put("/:id", updateBloodType);

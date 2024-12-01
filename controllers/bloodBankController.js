@@ -1,6 +1,5 @@
 import mongoose, { mongo } from "mongoose";
 import BloodBank from "../models/bloodBank.js";
-import Hospital from "../models/hospital.js";
 
 // @desc Get all bloodBanks
 // @route GET /api/v1/bloodBanks
@@ -8,7 +7,7 @@ const getBloodBanks = async (req, res, next) => {
     const bloodBanks = await BloodBank.find({}).populate('hospital', "name city country")
 
     if (!bloodBanks.length) {
-        return res.status(404).json({ success: false, Doner: 'no bloodBanks found' })
+        return res.status(404).json({ success: false, msg: 'no bloodBanks found' })
     }
 
     return res.json({ success: true, data: bloodBanks })
@@ -20,12 +19,12 @@ const getBloodBank = async (req, res, next) => {
     const { id } = req.params
 
     if (!mongoose.isValidObjectId(id)) {
-        return res.status(404).json({ success: false, Doner: 'invalid Id ' })
+        return res.status(404).json({ success: false, msg: 'invalid Id ' })
     }
     const bloodBank = await BloodBank.findOne({ _id: id }).populate("hospital")
 
     if (!bloodBank) {
-        return res.status(404).json({ success: false, Doner: 'no blood Bank found with this id' })
+        return res.status(404).json({ success: false, msg: 'no blood Bank found with this id' })
     }
 
     return res.json({ success: true, data: bloodBank })
@@ -50,7 +49,7 @@ const createBloodBank = async (req, res, next) => {
 
     //hospital already has a blood bank
     if (bloodBank) {
-        return res.status(401).json({ success: false, Doner: 'hospital cannot have multiple blood bank!' })
+        return res.status(401).json({ success: false, msg: 'hospital cannot have multiple blood bank!' })
     }
 
 
@@ -61,7 +60,7 @@ const createBloodBank = async (req, res, next) => {
         return res.status(500).json({ success: false, msg: "blood Bank couldn't created .." })
     }
 
-    res.status(201).json({ msg: 'blood Bank submitted!!', data: newBloodBank })
+    res.status(201).json({ success: true, msg: 'blood Bank submitted!!', data: newBloodBank })
 }
 
 
@@ -97,10 +96,10 @@ const deleteBloodBank = async (req, res, next) => {
 
     if (!bloodBank) {
         console.log("blood Bank not found..")
-        return res.status(404).json({ success: true, Doner: `blood Bank not found` })
+        return res.status(404).json({ success: true, msg: `blood Bank not found` })
     }
 
-    res.status(200).json({ success: true, Doner: `blood Bank deleted`, bloodBank })
+    res.status(200).json({ success: true, msg: `blood Bank deleted`, bloodBank })
 }
 
 // @desc get  total bloodBanks count

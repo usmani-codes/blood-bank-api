@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Doner from '../models/doner.js'
+import Doner from '../models/Doner.js'
 import { User } from '../models/user.js'
 
 // @desc Get all doners
@@ -8,7 +8,7 @@ const getDoners = async (req, res, next) => {
     const doners = await Doner.find({}).populate("user").populate("blood").populate("bloodBank")
 
     if (!doners.length) {
-        return res.status(404).json({ success: false, Doner: 'no doners found' })
+        return res.status(404).json({ success: false, msg: 'no doners found' })
     }
 
     return res.json({ success: true, data: doners })
@@ -26,7 +26,7 @@ const getDoner = async (req, res, next) => {
     const doner = await Doner.findOne({ _id: id }).populate("user").populate("blood").populate("bloodBank")
 
     if (!doner) {
-        return res.status(404).json({ success: false, doner: 'no doner found with this id' })
+        return res.status(404).json({ success: false, msg: 'no doner found with this id' })
     }
 
     return res.json({ success: true, data: doner })
@@ -52,7 +52,7 @@ const updateDoner = async (req, res, next) => {
         return res.status(404).json({ success: false, msg: 'doner with this id not found' })
     }
 
-    res.status(201).json({ msg: 'doner updated ', data: doner })
+    res.status(201).json({ success: true, msg: 'doner updated ', data: doner })
 }
 
 // @desc delete a doner by id
@@ -68,7 +68,7 @@ const deleteDoner = async (req, res, next) => {
     const donerUser = await Doner.findOne({ _id: id })
 
     if (!donerUser) {
-        return res.status(404).json({ success: true, msg: `user not found` })
+        return res.status(404).json({ success: false, msg: `user not found` })
     }
 
     console.log('deleting user with id: ', donerUser.user)
@@ -79,7 +79,7 @@ const deleteDoner = async (req, res, next) => {
     const doner = await Doner.findOneAndDelete({ _id: id })
 
     if (!doner) {
-        return res.status(404).json({ success: true, doner: `doner not found` })
+        return res.status(404).json({ success: false, msg: `doner not found` })
     }
 
     res.status(203).json({ success: true, msg: `doner deleted`, doner })

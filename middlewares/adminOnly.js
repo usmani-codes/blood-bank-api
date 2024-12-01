@@ -5,7 +5,7 @@ export const AdminsOnly = async (req, res, next) => {
     if (payload.isAdmin) {
         console.log('welcome admin!! ')
     } else {
-        return res.status(401).json({ success: false, Doner: 'un-authorized!! admins only' })
+        return res.status(401).json({ success: false, msg: 'un-authorized!! admins only' })
     }
     next()
 }

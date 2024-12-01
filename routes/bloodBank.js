@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getBloodBanks, getBloodBank, createBloodBank, updateBloodBank, deleteBloodBank, getBloodBanksCount} from '../controllers/bloodBankController.js'
+import { getBloodBanks, getBloodBank, createBloodBank, updateBloodBank, deleteBloodBank, getBloodBanksCount } from '../controllers/bloodBankController.js'
 
 const router = express.Router()
 
@@ -17,7 +17,7 @@ router.post('/', createBloodBank)
 router.put('/:id', updateBloodBank)
 
 //delete a Order
-router.delete('/:id',deleteBloodBank)
+router.delete('/:id', deleteBloodBank)
 
 //get total bloodBanks count
 router.get('/get/count', getBloodBanksCount)
