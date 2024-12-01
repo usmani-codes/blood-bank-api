@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Doner from '../models/Doner.js'
+import Doner from '../models/doner.js'
 import { User } from '../models/user.js'
 
 // @desc Get all doners

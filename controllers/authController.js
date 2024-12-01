@@ -3,7 +3,7 @@ import bcypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 import { User } from '../models/user.js'
-import Doner from '../models/Doner.js'
+import Doner from '../models/doner.js'
 import Recipient from '../models/recipient.js'
 import Blood from '../models/blood.js'
 import BloodBank from '../models/bloodBank.js'
